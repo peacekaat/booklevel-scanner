@@ -1,49 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#6b4eff">
-<title>BookLevel Scanner</title>
-<style>
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f7f5fb;color:#17151f}
-main{max-width:560px;margin:auto;padding:28px 18px 40px}
-h1{margin:0 0 6px;font-size:32px}.sub{color:#625d6d}
-.card{background:#fff;border-radius:20px;padding:18px;margin:16px 0;box-shadow:0 5px 24px #0001}
-button{width:100%;border:0;border-radius:14px;padding:16px;font-size:17px;font-weight:700;background:#6b4eff;color:white;margin-top:8px}
-button.secondary{background:#eeeaf8;color:#352b55}
-video{width:100%;border-radius:16px;background:#111;display:none;margin-bottom:10px}
-input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #d8d2e3;border-radius:12px;font-size:17px;margin:8px 0}
-.label{color:#706b79;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
-.title{font-size:23px;font-weight:750;margin:4px 0}.author{color:#625d6d}
-.result{display:none}.note{background:#f3f0fa;border-radius:12px;padding:12px;font-size:14px;color:#514b60;margin-top:14px}
-#error{color:#a51f3d;margin-top:10px}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookLevel Scanner</title>
+  <style>
+    body{font-family:system-ui,sans-serif;max-width:720px;margin:auto;padding:20px;line-height:1.4}
+    h1{margin-bottom:6px}.muted{color:#666}
+    button,input{font:inherit;padding:12px;border-radius:10px;border:1px solid #bbb}
+    button{cursor:pointer}.row{display:flex;gap:8px;flex-wrap:wrap}
+    input{flex:1;min-width:220px}.card{margin-top:18px;padding:16px;border:1px solid #ddd;border-radius:14px}
+    video{width:100%;max-height:55vh;border-radius:14px;background:#111;margin-top:12px}
+    #error{color:#b00020;margin-top:12px}
+    #result{display:none}
+  </style>
 </head>
 <body>
-<main>
-<h1>📚 BookLevel</h1>
-<p class="sub">Scan an ISBN and identify the book edition.</p>
-<section class="card">
-<video id="video" playsinline></video>
-<button id="scan" type="button">📷 Scan ISBN</button>
-<button id="stop" class="secondary" type="button" hidden>Stop scanning</button>
-<p style="text-align:center;color:#706b79">or enter an ISBN</p>
-<input id="isbn" inputmode="numeric" placeholder="978-..." aria-label="ISBN">
-<button id="lookup" type="button">Look up ISBN</button>
-<div id="error" role="alert"></div>
-</section>
-<section id="result" class="card result" aria-live="polite">
-<div class="label">Book</div>
-<div id="title" class="title"></div>
-<div id="author" class="author"></div>
-<div class="label" style="margin-top:16px">ISBN</div>
-<div id="isbnOut"></div>
-<div id="edition" class="note"></div>
-<div class="note">Next step: connect verified AR and Lexile data.</div>
-<button id="again" class="secondary" type="button">Scan another book</button>
-</section>
-</main>
-<script type="module" src="./script.js"></script>
+  <h1>📚 BookLevel Scanner</h1>
+  <p class="muted">Scan an ISBN or enter it manually.</p>
+
+  <div class="row">
+    <button id="scan">Scan ISBN</button>
+    <button id="stop" hidden>Stop camera</button>
+  </div>
+
+  <video id="video" playsinline autoplay muted style="display:none"></video>
+
+  <div class="card">
+    <div class="row">
+      <input id="isbn" inputmode="numeric" placeholder="ISBN-10 or ISBN-13">
+      <button id="lookup">Look up ISBN</button>
+    </div>
+    <div id="error"></div>
+  </div>
+
+  <div id="result" class="card">
+    <h2 id="title"></h2>
+    <p><strong>Author:</strong> <span id="author"></span></p>
+    <p><strong>ISBN:</strong> <span id="isbnOut"></span></p>
+    <p id="edition"></p>
+    <p><strong>AR:</strong> <span id="ar">Not verified yet</span></p>
+    <p><strong>Lexile:</strong> <span id="lexile">Not verified yet</span></p>
+    <button id="again">Scan another book</button>
+  </div>
+
+  <script type="module" src="./script.js"></script>
 </body>
 </html>
